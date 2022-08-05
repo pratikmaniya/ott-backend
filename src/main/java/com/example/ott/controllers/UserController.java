@@ -16,7 +16,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @CrossOrigin("http://localhost:3000")
     @PostMapping(value = "/register", consumes = {
             MediaType.APPLICATION_JSON_VALUE
     })
@@ -30,7 +29,6 @@ public class UserController {
         }
     }
 
-    @CrossOrigin("http://localhost:3000")
     @GetMapping("/users/{id}")
     public ResponseEntity getUser(@PathVariable("id") String id){
         CustomizedResponse customizedResponse = null;
