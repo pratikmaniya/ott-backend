@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @CrossOrigin(origins={"http://localhost:5000", "https://ott-244.herokuapp.com/"})
+    @CrossOrigin(origins={"http://localhost:3000", "https://ott-244.herokuapp.com/"})
     @PostMapping(value = "/register", consumes = {
             MediaType.APPLICATION_JSON_VALUE
     })
@@ -30,7 +30,7 @@ public class UserController {
         }
     }
 
-    @CrossOrigin(origins={"http://localhost:5000", "https://ott-244.herokuapp.com/"})
+    @CrossOrigin(origins={"http://localhost:3000", "https://ott-244.herokuapp.com/"})
     @GetMapping("/users/{id}")
     public ResponseEntity getUser(@PathVariable("id") String id){
         CustomizedResponse customizedResponse = null;

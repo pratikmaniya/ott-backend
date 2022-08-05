@@ -18,7 +18,7 @@ public class MovieController {
     @Autowired
     private MovieService movieService;
 
-    @CrossOrigin(origins={"http://localhost:5000", "https://ott-244.herokuapp.com/"})
+    @CrossOrigin(origins={"http://localhost:3000", "https://ott-244.herokuapp.com/"})
     @PostMapping(value = "/movies", consumes = {
             MediaType.APPLICATION_JSON_VALUE
     })
@@ -27,42 +27,42 @@ public class MovieController {
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
-    @CrossOrigin(origins={"http://localhost:5000", "https://ott-244.herokuapp.com/"})
+    @CrossOrigin(origins={"http://localhost:3000", "https://ott-244.herokuapp.com/"})
     @GetMapping("/movies")
     public ResponseEntity getMovies(){
         CustomizedResponse customizedResponse = new CustomizedResponse("Movies retrieved successfully", movieService.getMovies());
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
     }
 
-    @CrossOrigin(origins={"http://localhost:5000", "https://ott-244.herokuapp.com/"})
+    @CrossOrigin(origins={"http://localhost:3000", "https://ott-244.herokuapp.com/"})
     @GetMapping("/shows")
     public ResponseEntity getShows(){
         CustomizedResponse customizedResponse = new CustomizedResponse("Shows retrieved successfully", movieService.getShows());
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
     }
 
-    @CrossOrigin(origins={"http://localhost:5000", "https://ott-244.herokuapp.com/"})
+    @CrossOrigin(origins={"http://localhost:3000", "https://ott-244.herokuapp.com/"})
     @GetMapping("/search")
     public ResponseEntity getSearchItemsResult(@RequestParam Map<String,String> requestParams){
         CustomizedResponse customizedResponse = new CustomizedResponse("Movies/shows retrieved successfully", movieService.getItemsBySearch(requestParams.get("query"), requestParams.get("type")));
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
     }
 
-    @CrossOrigin(origins={"http://localhost:5000", "https://ott-244.herokuapp.com/"})
+    @CrossOrigin(origins={"http://localhost:3000", "https://ott-244.herokuapp.com/"})
     @GetMapping("/featured")
     public ResponseEntity getFeatured(@RequestParam String type){
         CustomizedResponse customizedResponse = new CustomizedResponse("Movies retrieved successfully", movieService.getFeaturedItems(type));
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
     }
 
-    @CrossOrigin(origins={"http://localhost:5000", "https://ott-244.herokuapp.com/"})
+    @CrossOrigin(origins={"http://localhost:3000", "https://ott-244.herokuapp.com/"})
     @GetMapping("/inDemand")
     public ResponseEntity getInDemand(){
         CustomizedResponse customizedResponse = new CustomizedResponse("Movies retrieved successfully", movieService.getInDemandItems());
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
     }
 
-    @CrossOrigin(origins={"http://localhost:5000", "https://ott-244.herokuapp.com/"})
+    @CrossOrigin(origins={"http://localhost:3000", "https://ott-244.herokuapp.com/"})
     @GetMapping("/movies/{id}")
     public ResponseEntity getMovie(@PathVariable("id") String id){
         try {
@@ -75,7 +75,7 @@ public class MovieController {
 
     }
 
-    @CrossOrigin(origins={"http://localhost:5000", "https://ott-244.herokuapp.com/"})
+    @CrossOrigin(origins={"http://localhost:3000", "https://ott-244.herokuapp.com/"})
     @PutMapping(value = "/movies/{id}", consumes = {
             MediaType.APPLICATION_JSON_VALUE
     })
@@ -89,7 +89,7 @@ public class MovieController {
         }
     }
 
-    @CrossOrigin(origins={"http://localhost:5000", "https://ott-244.herokuapp.com/"})
+    @CrossOrigin(origins={"http://localhost:3000", "https://ott-244.herokuapp.com/"})
     @DeleteMapping("/movies/{id}")
     public ResponseEntity deleteAMovie(@PathVariable("id") String id)
     {
