@@ -22,7 +22,7 @@ public class MovieController {
             MediaType.APPLICATION_JSON_VALUE
     })
     public ResponseEntity addMovie(@RequestBody MovieModel movie){
-        var response = new CustomizedResponse("Movie added successfully", Collections.singletonList(movieService.insertMovie(movie)));
+        CustomizedResponse response = new CustomizedResponse("Movie added successfully", Collections.singletonList(movieService.insertMovie(movie)));
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
