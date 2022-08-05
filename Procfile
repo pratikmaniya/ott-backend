@@ -1,1 +1,1 @@
-web: ./mvnw -DskipTests spring-boot:run -X
+web: ./mvnw -DskipTests spring-boot:run
