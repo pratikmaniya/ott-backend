@@ -1,1 +1,1 @@
-web: ./mvnw -Dserver.port=$PORT -DskipTests spring-boot:run
+web: ./mvnw -Dserver.port=process.env.PORT -DskipTests spring-boot:run
