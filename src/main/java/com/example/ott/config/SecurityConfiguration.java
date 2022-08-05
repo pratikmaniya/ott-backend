@@ -30,6 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/search").permitAll()
                 .antMatchers("/users/**").permitAll()
                 .antMatchers("/featured").permitAll()
+                .antMatchers("/inDemand").permitAll()
                 .anyRequest().authenticated();
     }
 

@@ -22,14 +22,14 @@ public class UserService implements UserDetailsService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public UserModel insertUser(UserModel user) throws Exception{
-        if(user.getUsername() == null || user.getEmail() == null || user.getFirstName() == null || user.getLastName() == null || user.getPassword() == null){
+        if(user.getEmail() == null || user.getFirstName() == null || user.getLastName() == null || user.getPassword() == null){
             throw new Exception("Please fill all the details");
-        } else if(!(user.getFirstName() instanceof String) || !(user.getLastName() instanceof String) || !(user.getEmail() instanceof String) || !(user.getUsername() instanceof String) || !(user.getPassword() instanceof String)){
+        } else if(!(user.getFirstName() instanceof String) || !(user.getLastName() instanceof String) || !(user.getEmail() instanceof String) || !(user.getPassword() instanceof String)){
             throw new Exception("Invalid data types, Please check data types");
         } else {
-            Optional<UserModel> dbUser = Optional.ofNullable(userRepository.findByUsername(user.getUsername()));
+            Optional<UserModel> dbUser = Optional.ofNullable(userRepository.findByEmail(user.getEmail()));
             if(dbUser.isPresent()){
-                throw new Exception("User with username: " + user.getUsername() + " is already exists. Please choose the different username");
+                throw new Exception("User with email: " + user.getEmail() + " is already exists. Please choose the different email");
             }else {
                 String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
                 user.setPassword(encodedPassword);
@@ -44,17 +44,23 @@ public class UserService implements UserDetailsService {
         if(!user.isPresent()){
             throw new Exception("User with " + id + " is not found");
         }
+        user.get().setPassword(null);
+        return user;
+    }
+
+    public UserModel getUserByEmail(String email) throws Exception{
+        UserModel user = userRepository.findByEmail(email);
         return user;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
-        UserModel foundUser = userRepository.findByUsername(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException{
+        UserModel foundUser = userRepository.findByEmail(email);
 
-        String uname = foundUser.getUsername();
+        String femail = foundUser.getEmail();
         String password = foundUser.getPassword();
 
-        return new User(uname, password, new ArrayList<>());
+        return new User(femail, password, new ArrayList<>());
     }
 
 }

@@ -35,9 +35,20 @@ public class MovieService {
         return shows;
     }
 
-    public List<MovieModel> getItemsBySearch(String queryString){
-        Query query = new Query();
-        query.addCriteria(Criteria.where("title").regex(queryString));
+    public List<MovieModel> getItemsBySearch(String queryString, String type){
+        Criteria criteria = new Criteria();
+        if(type.equals("movie")){
+            criteria.andOperator(
+                    Criteria.where("title").regex(queryString, "i"),
+                    Criteria.where("isMovie").is(true)
+            );
+        } else if(type.equals("show")){
+            criteria.andOperator(
+                    Criteria.where("title").regex(queryString, "i"),
+                    Criteria.where("isShow").is(true)
+            );
+        }
+        Query query = new Query(criteria);
         List<MovieModel> movies = mongoTemplate.find(query, MovieModel.class);
         return movies;
     }
@@ -57,6 +68,11 @@ public class MovieService {
         }
         Query query = new Query(criteria);
         List<MovieModel> movies = mongoTemplate.find(query, MovieModel.class);
+        return movies;
+    }
+
+    public List<MovieModel> getInDemandItems(){
+        List<MovieModel> movies = movieRepository.findByInDemand(true);
         return movies;
     }
 
