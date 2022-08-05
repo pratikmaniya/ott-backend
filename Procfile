@@ -1,1 +1,1 @@
-web: java -jar target/ott-0.0.1-SNAPSHOT.jar -X
+web: ./mvnw -DskipTests spring-boot:run
